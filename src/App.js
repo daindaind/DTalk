@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout, Space, Flex } from "antd";
+import { Navbar } from "./ui/navbar";
+import { Home } from "./pages/home";
+import { Signup } from './pages/signup';
+import { MyProfile } from './pages/myProfile';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
+const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/myProfile" element={<MyProfile />} />
+        </Routes>
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </Provider>
   );
 }
 
