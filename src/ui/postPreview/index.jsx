@@ -2,7 +2,7 @@ import * as S from "./PostPreview.styled";
 import { Button, Card, Avatar, Tooltip } from 'antd';
 import { HeartFilled, HeartOutlined, EllipsisOutlined, ShareAltOutlined, CommentOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { newFollowing, unFollowing } from "../../redux/slices/userSlice";
 import { getPostComments } from "../../api/getPostComments";
 import { Comment } from "../comment";

@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { getUserDataActions } from "../actions/getUserDataActions";
 
 export const initialState = {
-    email: "",
-    password: "",
     followList: [
         {
             id: 1,
@@ -44,7 +41,6 @@ export const initialState = {
             follow: false,
         }
     ],
-    loading: false,
 }
 
 const userSlice = createSlice({
@@ -74,9 +70,13 @@ const userSlice = createSlice({
                 follow: follow,
             }
             state.followList.push(newFollow);
-        }
+        },
+        removeUnfollowed(state) {
+            console.log("a");
+            state.followList = state.followList.filter(user => user.follow === true);
+        },
     },
 });
 
-export const { following, unFollowing, newFollowing } = userSlice.actions;
+export const { following, unFollowing, newFollowing, removeUnfollowed } = userSlice.actions;
 export default userSlice.reducer;

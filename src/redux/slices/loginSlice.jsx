@@ -5,7 +5,6 @@ export const initialState = {
     loading: false,
     token: "",
     id: 0,
-    email: "",
     username: "",
     isLogin: false,
 }
@@ -15,10 +14,8 @@ const loginSlice = createSlice({
     initialState: initialState,
     reducers: {
         logout(state) {
-            state.loading = true;
-            state.isLogin = false;
+            Object.assign(state, initialState);
             localStorage.clear();
-            state.loading = false;
         }
     },
     extraReducers: (builder) => {
@@ -30,13 +27,11 @@ const loginSlice = createSlice({
                 // console.log(payload);
                 const token = payload.token;
                 const username = payload.username;
-                const email = payload.email;
                 const id = payload.id;
                 localStorage.setItem("accessToken", token);
                 localStorage.setItem("username", username);
                 state.token = token;
                 state.username = username;
-                state.email = email;
                 state.id = id;
                 state.loading = false;
                 state.isLogin = true;
