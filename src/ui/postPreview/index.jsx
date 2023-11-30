@@ -19,8 +19,8 @@ export const PostPreview = ({ id, title, content, img, username, writterId }) =>
     const [openComment, setOpenComment] = useState(false);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const isLogin = useSelector((state) => state.login.isLogin);
-    const userId = useSelector((state) => state.login.id);
+    const isLogin = useSelector((state) => state.user.isLogin);
+    const userId = useSelector((state) => state.user.id);
     const notMyPost = <S.MenuBtn onClick={() => { alert("신고되었습니다.") }}>신고하기</S.MenuBtn>;
     const myPost =
         <>
@@ -65,7 +65,11 @@ export const PostPreview = ({ id, title, content, img, username, writterId }) =>
                 hoverable
                 actions={[
                     <ShareAltOutlined key="share" />,
-                    like ? <HeartFilled key="like" onClick={() => setLike(!like)} /> : <HeartOutlined key="like" onClick={() => setLike(!like)} />,
+                    like ? <HeartFilled key="like" onClick={() => setLike(!like)} />
+                        : <HeartOutlined key="like" onClick={
+                            () => isLogin ? setLike(!like)
+                                : alert("로그인 후 이용해주세요")
+                        } />,
                     <CommentOutlined key="comment" onClick={() => onComment()} />,
                     <Tooltip placement="top" title={username ? myPost : notMyPost}>
                         <EllipsisOutlined key="ellipsis" />

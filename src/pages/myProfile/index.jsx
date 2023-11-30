@@ -7,7 +7,7 @@ import { ProfilePreview } from "../../ui/profilePreivew";
 export const MyProfile = () => {
     const followList = useSelector((state) => state.user.followList);
     const followerList = useSelector((state) => state.user.followerList);
-    // const isLogin = useSelector((state) => state.login.isLogin);
+    // const isLogin = useSelector((state) => state.user.isLogin);
 
     return (
         <S.Container>

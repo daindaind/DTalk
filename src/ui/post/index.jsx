@@ -12,7 +12,7 @@ export const Post = () => {
     const [content, setContent] = useState("");
     const [img, setImg] = useState("");
     const postId = useSelector((state) => state.post.posts).length;
-    const userId = useSelector((state) => state.login.id);
+    const userId = useSelector((state) => state.user.id);
     const dispatch = useDispatch();
     const selectFile = useRef("");
 

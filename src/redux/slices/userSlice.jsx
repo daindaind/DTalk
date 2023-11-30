@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginActions } from "../actions/loginActions";
 
 export const initialState = {
+    loading: false,
+    token: "",
+    id: 0,
+    username: "",
+    isLogin: false,
     followList: [
         {
             id: 1,
@@ -47,6 +53,10 @@ const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
+        logout(state) {
+            Object.assign(state, initialState);
+            localStorage.clear();
+        },
         following(state, action) {
             const userIdToAdd = action.payload;
 
@@ -76,7 +86,30 @@ const userSlice = createSlice({
             state.followList = state.followList.filter(user => user.follow === true);
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loginActions.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(loginActions.fulfilled, (state, { payload }) => {
+                // console.log(payload);
+                const token = payload.token;
+                const username = payload.username;
+                const id = payload.id;
+                localStorage.setItem("accessToken", token);
+                localStorage.setItem("username", username);
+                state.token = token;
+                state.username = username;
+                state.id = id;
+                state.loading = false;
+                state.isLogin = true;
+            })
+            .addCase(loginActions.rejected, (state, { payload }) => {
+                // console.log(payload);
+                state.loading = false;
+            });
+    }
 });
 
-export const { following, unFollowing, newFollowing, removeUnfollowed } = userSlice.actions;
+export const { logout, login, following, unFollowing, newFollowing, removeUnfollowed } = userSlice.actions;
 export default userSlice.reducer;

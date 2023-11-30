@@ -13,7 +13,7 @@ import { LoadingSpinner } from "../../components/loadingSpinner";
 
 export const Home = () => {
     const [ref, inview] = useInView();
-    const isLogin = useSelector((state) => state.login.isLogin);
+    const isLogin = useSelector((state) => state.user.isLogin);
     const myPosts = useSelector((state) => state.post.posts);
 
     const {

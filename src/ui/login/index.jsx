@@ -5,9 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from "./schema";
 import { useDispatch, useSelector } from "react-redux";
 import { loginActions } from "../../redux/actions/loginActions";
+import { useCallback } from "react";
 
 export const Login = () => {
-    const loading = useSelector((state) => state.login.loading);
+    const loading = useSelector((state) => state.user.loading);
     const dispatch = useDispatch();
 
     const {
@@ -19,11 +20,11 @@ export const Login = () => {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = async (value) => {
+    const onSubmit = useCallback(async (value) => {
         const { username, password } = value;
         dispatch(loginActions({ username, password }));
         alert("로그인 되었습니다.");
-    };
+    });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

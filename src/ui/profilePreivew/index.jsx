@@ -1,6 +1,6 @@
 import { Card } from "antd";
 import * as S from "./ProfilePreview.styled"
-import { logout } from "../../redux/slices/loginSlice";
+import { logout } from "../../redux/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { UserFollow } from "../../components/userFollow";
 
@@ -8,7 +8,7 @@ const { Meta } = Card;
 
 export const ProfilePreview = () => {
     const dispatch = useDispatch();
-    const userName = useSelector((state) => state.login.username);
+    const userName = useSelector((state) => state.user.username);
     const followList = useSelector((state) => state.user.followList);
     const followerListNum = useSelector((state) => state.user.followerList).length;
     const postsNum = useSelector((state) => state.post.posts).length;

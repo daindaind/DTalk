@@ -3,7 +3,7 @@ import * as S from "./Signup.styled";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from "./schema";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../api/signup";
 
@@ -25,7 +25,7 @@ export const Signup = () => {
         setAgreement(e.target.checked);
     };
 
-    const onSubmit = async (value) => {
+    const onSubmit = useCallback(async (value) => {
         if (!agreement) {
             alert("D Talk 가입에 동의해야 합니다!");
         } else {
@@ -35,7 +35,7 @@ export const Signup = () => {
                 navigate("/");
             }
         }
-    };
+    });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
